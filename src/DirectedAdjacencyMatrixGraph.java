@@ -86,18 +86,9 @@ public class DirectedAdjacencyMatrixGraph<V, E> extends AbstractGraph<V, E> {
 	/**
 	 * {@inheritDoc}
 	 */
-	// TODO: remove answer
 	public ArrayList<Integer> getNeighbors(int v) {
 		// Intentionally not implemented - see homework assignment.
-		// throw new UnsupportedOperationException("Not yet implemented");
-		checkVertex(v);
-		ArrayList<Integer> neighbors = new ArrayList<Integer>();
-		for (int nv = 0; nv < numVertices(); nv++) {
-			if (edges[v][nv] != null) {
-				neighbors.add(nv);
-			}
-		}
-		return neighbors;
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 	
 	/**
@@ -107,18 +98,8 @@ public class DirectedAdjacencyMatrixGraph<V, E> extends AbstractGraph<V, E> {
 	 *            the vertex of which to compute the in degree.
 	 * @return the in degree of vertex v.
 	 */
-	// TODO: Remove Answer
 	public int inDegree(int v) {
 		// Intentionally not implemented - see homework assignment.
-		// throw new UnsupportedOperationException("Not yet implemented");
-		checkVertex(v);
-		int in = 0;
-		for(int nv = 0; nv < numVertices(); nv++) {
-			if (edges[nv][v] != null) {
-				in++;
-			}
-		}
-
-		return in;
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 }
