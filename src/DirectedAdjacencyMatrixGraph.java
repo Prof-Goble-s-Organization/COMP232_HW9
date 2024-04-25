@@ -1,0 +1,124 @@
+import java.util.ArrayList;
+
+/**
+ * An adjacency matrix implementation of the Graph ADT for directed graphs.
+ * 
+ * @author Willim Goble
+ * @author Dickinson College
+ * @version April 23, 2024
+ * 
+ * @param <V>
+ *            the type of object associated with the vertices.
+ * @param <E>
+ *            the type of object associated with the edges.
+ */
+public class DirectedAdjacencyMatrixGraph<V, E> extends AbstractGraph<V, E> {
+
+	/**
+	 * Holds the objects associated with each edge. Null values indicate that an
+	 * edge does not exist.
+	 * 
+	 * <Pre>
+	 * Row (first) index = start vertex.
+	 * Column (second) index = end vertex
+	 * </pre>
+	 */
+	protected E[][] edges;
+
+	/**
+	 * Construct a new AdjacencyMatrixGraph with the specified number of
+	 * vertices.
+	 * 
+	 * @param numVertices
+	 *            the number of vertices in the graph.
+	 */
+	@SuppressWarnings("unchecked")
+	public DirectedAdjacencyMatrixGraph(int numVertices) {
+		super(numVertices);
+		edges = (E[][]) new Object[numVertices][numVertices];
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addEdge(int v1, int v2, E value) {
+		checkVertices(v1, v2);
+
+		if (v1 == v2) {
+			throw new IllegalArgumentException(
+					"Self-edges are not allowed: v1 cannot equal v2.");
+		}
+
+		if (value == null) {
+			throw new IllegalArgumentException("Edge value cannot be null.");
+		}
+
+		// add the edge.
+		if (edges[v1][v2] == null) {
+			numEdges++;
+		}
+		edges[v1][v2] = value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public E getEdge(int v1, int v2) {
+		checkVertices(v1, v2);
+		return edges[v1][v2];
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public E removeEdge(int v1, int v2) {
+		checkVertices(v1, v2);
+		E tmp = edges[v1][v2];
+		edges[v1][v2] = null;
+		
+		if (tmp != null) {
+			numEdges--;
+		}
+		
+		return tmp;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	// TODO: remove answer
+	public ArrayList<Integer> getNeighbors(int v) {
+		// Intentionally not implemented - see homework assignment.
+		// throw new UnsupportedOperationException("Not yet implemented");
+		checkVertex(v);
+		ArrayList<Integer> neighbors = new ArrayList<Integer>();
+		for (int nv = 0; nv < numVertices(); nv++) {
+			if (edges[v][nv] != null) {
+				neighbors.add(nv);
+			}
+		}
+		return neighbors;
+	}
+	
+	/**
+	 * Get the in degree of vertex v.
+	 * 
+	 * @param v
+	 *            the vertex of which to compute the in degree.
+	 * @return the in degree of vertex v.
+	 */
+	// TODO: Remove Answer
+	public int inDegree(int v) {
+		// Intentionally not implemented - see homework assignment.
+		// throw new UnsupportedOperationException("Not yet implemented");
+		checkVertex(v);
+		int in = 0;
+		for(int nv = 0; nv < numVertices(); nv++) {
+			if (edges[nv][v] != null) {
+				in++;
+			}
+		}
+
+		return in;
+	}
+}
